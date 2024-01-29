@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Face App</title>
+    <script>
+      function showloading() {
+        image = document.getElementById("loading_image");
+        image.style.display = "inline";
+      }
+    </script>
+  </head>
+
+  <body class="bg-black">
+    <div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <form
+        class="max-w-md w-full bg-white rounded-lg shadow-lg p-6"
+        action="/upload"
+        method="post"
+        enctype="multipart/form-data"
+        onsubmit="showloading()"
+      >
+        <h2 class="text-xl font-bold text-gray-800 mb-6">FaceApp</h2>
+        <div class="mb-6">
+          <label class="block text-gray-700 font-bold mb-2" for="face-image">
+            Upload a face image:
+          </label>
+          <input
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+          />
+        </div>
+        <div class="flex justify-center">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Process
+          </button>
+        </div>
+        {% if result1 %}
+    <div style="text-align: center">
+      <p class="text-fuchsia-600 underline underline-offset-8 ">Result:{{result1}}</p>
+    </div>
+  </div>
+  {% endif %}
+  {% if noface %}
+  <div style="text-align: center">
+    <p class="text-fuchsia-600 underline-offset-8" >Result:No Face Detected</p>
+  </div>
+  </div>
+ {% endif %}
+      </form>
+      <div style="text-align: center">
+        <img
+          id="loading_image"
+          style="display: none"
+          src="{{ url_for('static', filename='loading.gif')}}"
+        />
+      </div>
+    </div>
+    
+
+ 
+  </body>
+</html>
